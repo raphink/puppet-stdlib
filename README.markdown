@@ -1,5 +1,7 @@
 # Puppet Labs Standard Library #
 
+[![Build Status](https://travis-ci.org/puppetlabs/puppetlabs-stdlib.png?branch=master)](https://travis-ci.org/puppetlabs/puppetlabs-stdlib)
+
 This module provides a "standard library" of resources for developing Puppet
 Modules.  This modules will include the following additions to Puppet
 
@@ -46,7 +48,7 @@ All stdlib releases in the 2.0 major version support Puppet 2.6 and Puppet 2.7.
 ## stdlib 3.x ##
 
 The 3.0 major release of stdlib drops support for Puppet 2.6.  Stdlib 3.x
-supports Puppet 2.7.
+supports Puppet 2 and Puppet 3.
 
 # Functions #
 
@@ -204,6 +206,25 @@ environment.
 Example:
   $module_path = get_module_path('stdlib')
 
+
+- *Type*: rvalue
+
+getparam
+--------
+
+Takes a resource reference and name of the parameter and returns
+value of resource's parameter.
+
+For example:
+
+    define example_resource($param) {
+    }
+
+    example_resource { "example_resource_instance":
+        param => "param_value"
+    }
+
+    getparam(Example_resource["example_resource_instance"], "param")
 
 - *Type*: rvalue
 
