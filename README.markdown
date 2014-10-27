@@ -86,6 +86,41 @@ converted to arrays of alternating keys and values.
 
 - *Type*: rvalue
 
+append_file_content
+-------------------
+Add content to a file resource.
+
+This allows to generate concatenated files on the master side,
+without managing multiple file resources.
+
+The first argument is the file path. You are responsible for
+creating the file resource yourself prior to calling the
+function. This way, you can finely control the file's
+parameters.
+
+The second argument is the content to be added to the file.
+
+The third (optional) argument is the order, specifying the
+position in which the content should be added. The default
+order is '10'. If you specified a content in the original
+file resource, this content is kept with order '00'
+
+Examples:
+
+    
+    file { '/tmp/target':
+      content => "Orig content\n",
+    }
+    
+    append_file_content('/tmp/target', "hello, ")
+    append_file_content('/tmp/target', "world\n")
+    append_file_content('/tmp/target', "This is a multi
+    line statement
+    ", '01')
+    append_file_content('/tmp/target', template('foobar/example.erb'), '05')
+
+- *Type* : statement
+
 base64
 --------
 Converts a string to and from base64 encoding.
